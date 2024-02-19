@@ -1,0 +1,66 @@
+name: Build Backports Tar
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-backports:
+    name: Build Backports Tar
+    runs-on: ubuntu-latest
+
+    container:
+      image: alpine:latest
+
+    steps:
+      - name: Get Kernel Tag
+        id: get_kernel_tag
+        env:
+          TAG_NAME: ${{ github.event.release.tag_name }}
+        run:
+          KERNEL_TARGET=$(echo $TAG_NAME | sed 's/^backports-v//')
+
+          echo "Targetting Kernel Version for Backports $KERNEL_TARGET"
+
+          echo "kernel_target=$KERNEL_TARGET" >> $GITHUB_OUTPUT
+
+      - name: Install Dependencies
+        run: |
+          apk update && apk add git python3 ocaml ocaml-compiler-libs ncurses-dev autoconf automake pkgconfig musl-dev make patch zstd
+
+      - name: Build Coccinelle
+        run: |
+          git clone --depth=1 https://github.com/coccinelle/coccinelle.git
+          cd coccinelle
+          ./autogen
+          ./configure
+          make
+          make install
+
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Clone linux-stable
+        env:
+          KERNEL_VER: ${{ steps.get_kernel_tag.outputs.kernel_target }}
+        run: |
+          git clone --depth=1 --branch v${{ env.KERNEL_VER }} https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git linux-stable
+
+      - name: Fix ownership
+        run: |
+          chown -R root:root /__w/backports
+
+      - name: Build Backports
+        env:
+          KERNEL_VER: ${{ steps.get_kernel_tag.outputs.kernel_target }}
+        run: python3 gentree.py --clean linux-stable backports-${{ env.KERNEL_VER }}
+
+      - name: Pack Backports Tar
+        env:
+          KERNEL_VER: ${{ steps.get_kernel_tag.outputs.kernel_target }}
+        run: |
+          tar -c backports-${{ env.KERNEL_VER }} | zstd > backports-${{ env.KERNEL_VER }}.tar.zst
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: backports-${{ steps.get_kernel_tag.outputs.kernel_target }}.tar.zst
