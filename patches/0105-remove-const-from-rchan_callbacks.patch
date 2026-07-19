@@ -1,6 +1,6 @@
 --- a/drivers/net/wireless/ath/ath10k/spectral.c
 +++ b/drivers/net/wireless/ath/ath10k/spectral.c
-@@ -497,7 +497,11 @@ static int remove_buf_file_handler(struc
+@@ -487,7 +487,11 @@ static int remove_buf_file_handler(struc
  	return 0;
  }
  
@@ -14,7 +14,7 @@
  };
 --- a/drivers/net/wireless/ath/ath11k/spectral.c
 +++ b/drivers/net/wireless/ath/ath11k/spectral.c
-@@ -147,7 +147,11 @@ static int remove_buf_file_handler(struc
+@@ -148,7 +148,11 @@ static int remove_buf_file_handler(struc
  	return 0;
  }
  
@@ -28,7 +28,7 @@
  };
 --- a/drivers/net/wireless/ath/ath9k/common-spectral.c
 +++ b/drivers/net/wireless/ath/ath9k/common-spectral.c
-@@ -1053,7 +1053,11 @@ static int remove_buf_file_handler(struc
+@@ -1032,7 +1032,11 @@ static int remove_buf_file_handler(struc
  	return 0;
  }
  

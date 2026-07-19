@@ -1,7 +1,7 @@
 --- a/net/wireless/core.c
 +++ b/net/wireless/core.c
-@@ -539,10 +539,6 @@ use_default_name:
- 	INIT_WORK(&rdev->scan_done_wk, __cfg80211_scan_done);
+@@ -535,10 +535,6 @@ use_default_name:
+ 	wiphy_work_init(&rdev->scan_done_wk, __cfg80211_scan_done);
  	INIT_DELAYED_WORK(&rdev->dfs_update_channels_wk,
  			  cfg80211_dfs_channels_update_work);
 -#ifdef CONFIG_CFG80211_WEXT
@@ -11,7 +11,7 @@
  	device_initialize(&rdev->wiphy.dev);
  	rdev->wiphy.dev.class = &ieee80211_class;
  	rdev->wiphy.dev.platform_data = rdev;
-@@ -1395,6 +1391,10 @@ void cfg80211_init_wdev(struct wireless_
+@@ -1424,6 +1420,10 @@ void cfg80211_init_wdev(struct wireless_
  	INIT_WORK(&wdev->pmsr_free_wk, cfg80211_pmsr_free_wk);
  
  #ifdef CONFIG_CFG80211_WEXT

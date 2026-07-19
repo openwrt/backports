@@ -2,7 +2,7 @@ diff --git a/drivers/net/wireless/intel/iwlwifi/iwl-debug.c b/drivers/net/wirele
 index ae4c2a3d63d5..339062da2917 100644
 --- a/drivers/net/wireless/intel/iwlwifi/iwl-debug.c
 +++ b/drivers/net/wireless/intel/iwlwifi/iwl-debug.c
-@@ -15,13 +15,16 @@ void __iwl_ ##fn(struct device *dev, const char *fmt, ...)	\
+@@ -15,13 +15,16 @@ void __iwl_ ##fn(struct device *dev, con
  	struct va_format vaf = {				\
  		.fmt = fmt,					\
  	};							\
@@ -23,7 +23,7 @@ index ae4c2a3d63d5..339062da2917 100644
  }
  
  __iwl_fn(warn)
-@@ -73,12 +76,18 @@ void __iwl_dbg(struct device *dev,
+@@ -74,12 +77,18 @@ void __iwl_dbg(struct device *dev,
  	va_list args;
  
  	va_start(args, fmt);

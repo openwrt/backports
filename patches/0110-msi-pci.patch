@@ -1,6 +1,6 @@
 --- a/drivers/net/wireless/ath/ath11k/pci.c
 +++ b/drivers/net/wireless/ath/ath11k/pci.c
-@@ -451,7 +451,11 @@ static int ath11k_pci_alloc_msi(struct a
+@@ -473,7 +473,11 @@ static int ath11k_pci_alloc_msi(struct a
  	pci_read_config_dword(pci_dev, pci_dev->msi_cap + PCI_MSI_ADDRESS_LO,
  			      &ab->pci.msi.addr_lo);
  

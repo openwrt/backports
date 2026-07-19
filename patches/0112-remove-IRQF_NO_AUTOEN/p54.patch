@@ -1,6 +1,6 @@
 --- a/drivers/net/wireless/intersil/p54/p54spi.c
 +++ b/drivers/net/wireless/intersil/p54/p54spi.c
-@@ -623,13 +623,21 @@ static int p54spi_probe(struct spi_devic
+@@ -624,13 +624,21 @@ static int p54spi_probe(struct spi_devic
  	gpio_direction_input(p54spi_gpio_irq);
  
  	ret = request_irq(gpio_to_irq(p54spi_gpio_irq),

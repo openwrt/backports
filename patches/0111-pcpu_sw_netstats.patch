@@ -14,7 +14,7 @@
  	u64_stats_update_end_irqrestore(&stats64->syncp, flags);
  
  	netif_dbg(dev, rx_status, dev->net, "< rx, len %zu, type 0x%x\n",
-@@ -1278,8 +1283,13 @@ static void tx_complete (struct urb *urb
+@@ -1281,8 +1286,13 @@ static void tx_complete (struct urb *urb
  		unsigned long flags;
  
  		flags = u64_stats_update_begin_irqsave(&stats64->syncp);

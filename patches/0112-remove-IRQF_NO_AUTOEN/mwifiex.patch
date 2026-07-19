@@ -1,6 +1,6 @@
 --- a/drivers/net/wireless/marvell/mwifiex/main.c
 +++ b/drivers/net/wireless/marvell/mwifiex/main.c
-@@ -1650,7 +1650,11 @@ static void mwifiex_probe_of(struct mwif
+@@ -1680,7 +1680,11 @@ static void mwifiex_probe_of(struct mwif
  
  	ret = devm_request_irq(dev, adapter->irq_wakeup,
  			       mwifiex_irq_wakeup_handler,
@@ -12,7 +12,7 @@
  			       "wifi_wake", adapter);
  	if (ret) {
  		dev_err(dev, "Failed to request irq_wakeup %d (%d)\n",
-@@ -1658,6 +1662,9 @@ static void mwifiex_probe_of(struct mwif
+@@ -1688,6 +1692,9 @@ static void mwifiex_probe_of(struct mwif
  		goto err_exit;
  	}
  
